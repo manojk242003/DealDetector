@@ -6,6 +6,7 @@ import { connectToDB } from "../mongoose";
 import { scrapeAmazonProduct } from "../scraper";
 import { getAveragePrice, getHighestPrice, getLowestPrice } from "../utils";
 import { User } from "@/types";
+import { generateEmailBody, sendEmail } from "../nodemailer";
 
 export async function scrapeAndStoreProduct(productUrl : string) {
     if(!productUrl) return;
@@ -120,10 +121,15 @@ export async function addUserEmailToProduct(productId:string,userEmail:string) {
 
             await product.save();
 
-            const emailContent = generateEmailBody(product,"WELCOME")
+            console.log("emailcontent is ready");
+            const emailContent =  await generateEmailBody(product,"WELCOME")
+            
+            console.log(emailContent);
+
+            await sendEmail (emailContent,[userEmail])
         }
     } catch (error) {
-
+        
         console.log(error)
     }
     
