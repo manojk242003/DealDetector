@@ -13,7 +13,6 @@ export async function scrapeAmazonProduct(url : string)
     const port = 22225;
     const session_id=(1000000*Math.random()) |0;
     const options = {
-
         auth: {
             username: `${username}-session-${session_id}`,
             password
@@ -68,19 +67,10 @@ export async function scrapeAmazonProduct(url : string)
             lowestPrice :Number(currentPrice) || Number(originalPrice),
             highestPrice : Number(originalPrice) || Number(originalPrice),
             averagePrice : Number(currentPrice) || Number(originalPrice)
-
-
         }
-
         console.log(data)
         return data;
-
-
     } catch (error : any) {
         throw new Error(`Failed to scrape Product :${error.message}`)
     }
-
-
-
-
 }   

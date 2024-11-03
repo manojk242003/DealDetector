@@ -17,7 +17,7 @@ const isValidAmazonProductLink =(url:string)=>
     }
     else return false
   } catch (error) {
-    
+    console.log(error)
   }
 }
 
